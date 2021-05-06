@@ -1,26 +1,18 @@
-/** @type {import("snowpack").SnowpackUserConfig } */
 module.exports = {
   mount: {
-    /* ... */
+    src: { url: '/' },
   },
-  plugins: [
-    /* ... */
-  ],
   routes: [
-    /* Enable an SPA Fallback in development: */
-    // {"match": "routes", "src": ".*", "dest": "/index.html"},
+    {
+      match: 'routes',
+      src: '.*',
+      dest: '/index.html',
+    },
   ],
-  optimize: {
-    /* Example: Bundle your final build: */
-    // "bundle": true,
-  },
-  packageOptions: {
-    /* ... */
-  },
+  plugins: ['@snowpack/plugin-react-refresh'],
   devOptions: {
-    /* ... */
-  },
-  buildOptions: {
-    /* ... */
+    // port: 4001,
+    open: 'none',
+    hmr: true,
   },
 };
