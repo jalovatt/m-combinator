@@ -9,7 +9,12 @@ module.exports = {
       dest: '/index.html',
     },
   ],
-  plugins: ['@snowpack/plugin-react-refresh'],
+  env: {
+    apikey: '08b1964f2885f6335cd92b41514e33ec',
+  },
+  plugins: [
+    '@snowpack/plugin-react-refresh',
+  ],
   devOptions: {
     // port: 4001,
     open: 'none',
