@@ -1,35 +1,8 @@
-import React, { useState, useEffect } from 'react';
-
-const { apikey } = import.meta.env;
-
-const apiBase = 'https://gateway.marvel.com/v1/public/';
-
-const apiRequest = (path, params = {}) => {
-  const paramArr = [`apikey=${apikey}`];
-
-  Object.entries(params).forEach(([k, v]) => paramArr.push(`${k}=${v}`));
-
-  return fetch(`${apiBase}${path}?${paramArr.join('&')}`)
-    .then((res) => res.json()).then((data) => ({ data }))
-    .catch((error) => ({ error }));
-};
+import React from 'react';
+import useApiRequest from './hooks/useMarvelApi';
 
 const APIResult = () => {
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState({});
-
-  useEffect(() => {
-    const getResult = async () => {
-      setLoading(true);
-
-      const apiResponse = await apiRequest('characters');
-
-      setResult(apiResponse);
-      setLoading(false);
-    };
-
-    return getResult();
-  }, []);
+  const { data, loading, error } = useApiRequest('events');
 
   if (loading) {
     return (
@@ -38,7 +11,10 @@ const APIResult = () => {
   }
 
   return (
-    <pre>{JSON.stringify(result, null, 2)}</pre>
+    <>
+      {error ? <pre>{JSON.stringify(error, null, 2)}</pre> : null}
+      {data ? <pre>{JSON.stringify(data, null, 2)}</pre> : null}
+    </>
   );
 };
 
