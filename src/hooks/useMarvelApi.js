@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import lscache from 'lscache';
 
 const { apikey } = import.meta.env;
 
@@ -53,9 +54,25 @@ export default (path, params) => {
 
   useEffect(() => {
     const getResult = async () => {
+      setError(null);
       setLoading(true);
 
-      const [apiData, apiError] = await apiRequest(path, params);
+      const requestKey = `${path}-${JSON.stringify(params)}`;
+
+      /*
+        Marvel's API is pretty slow, even just to return a 304, and gets worse
+        with paginated content. Their docs say it's alright to cache responses
+        for up to 24 hours.
+      */
+      let result = lscache.get(requestKey);
+
+      if (!result) {
+        result = await apiRequest(path, params);
+
+        lscache.set(requestKey, result, 60 * 60 * 24);
+      }
+
+      const [apiData, apiError] = result;
 
       if (apiData) {
         setData(apiData);
