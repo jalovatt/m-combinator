@@ -1,26 +1,11 @@
 import React from 'react';
-import useApiRequest from './hooks/useMarvelApi';
-
-const APIResult = () => {
-  const { data, loading, error } = useApiRequest('events');
-
-  if (loading) {
-    return (
-      <h3>Loading...</h3>
-    );
-  }
-
-  return (
-    <>
-      {error ? <pre>{JSON.stringify(error, null, 2)}</pre> : null}
-      {data ? <pre>{JSON.stringify(data, null, 2)}</pre> : null}
-    </>
-  );
-};
+import CharacterCard from './components/CharacterCard';
+import ComicCard from './components/ComicCard';
 
 export default () => (
-  <>
+  <div className="App">
     <h1>This is my project</h1>
-    <APIResult />
-  </>
+    <CharacterCard id="1010354" />
+    <ComicCard id="14077" />
+  </div>
 );
