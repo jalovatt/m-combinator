@@ -1,3 +1,9 @@
 .CharacterListItem {
+  &:hover {
+    text-shadow: red 4px 4px;
 
+    .ApiImage {
+      box-shadow: 4px 4px red;
+    }
+  }
 }

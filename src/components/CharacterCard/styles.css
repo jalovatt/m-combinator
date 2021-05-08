@@ -12,4 +12,12 @@
     border: 0.5rem solid black;
     margin-right: 0.5rem;
   }
+
+  &:hover {
+    text-shadow: red 4px 4px;
+
+    .ApiImage {
+      box-shadow: 4px 4px red;
+    }
+  }
 }
