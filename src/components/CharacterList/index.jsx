@@ -1,17 +1,16 @@
 import React from 'react';
+import { useCharacters } from '../../CharacterContext';
 import CharacterListItem from '../CharacterListItem';
-
 import './styles.css';
 
-export default () => (
-  <div className="CharacterList">
-    <CharacterListItem id="1010354" />
-    <CharacterListItem id="1010354" />
-    <CharacterListItem id="1010354" />
-    <CharacterListItem id="1010354" />
-    <CharacterListItem id="1010354" />
-    <CharacterListItem id="1010354" />
-    <CharacterListItem id="1010354" />
-    <CharacterListItem id="1010354" />
-  </div>
-);
+// Event 29 - Infinity War
+
+export default () => {
+  const characters = useCharacters();
+
+  return (
+    <div className="CharacterList">
+      {characters.array.map(({ id }) => <CharacterListItem key={id} id={id} />)}
+    </div>
+  );
+};

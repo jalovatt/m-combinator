@@ -67,9 +67,13 @@ export default (path, params) => {
       let result = lscache.get(requestKey);
 
       if (!result) {
-        result = await apiRequest(path, params);
+        result = await apiRequest(path, params)
+          // eslint-disable-next-line no-console
+          .catch((err) => console.error(err));
 
-        lscache.set(requestKey, result, 60 * 60 * 24);
+        if (result) {
+          lscache.set(requestKey, result, 60 * 60 * 24);
+        }
       }
 
       const [apiData, apiError] = result;
