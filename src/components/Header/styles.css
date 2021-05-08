@@ -1,0 +1,12 @@
+.Header {
+  display: flex;
+  align-items: center;
+
+  h1 {
+    font-family: var(--font-marvel);
+    font-size: 8rem;
+    text-transform: uppercase;
+
+    margin: 0 auto;
+  }
+}

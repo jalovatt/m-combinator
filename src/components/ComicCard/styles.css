@@ -1,0 +1,15 @@
+.ComicCard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  border: 1px solid black;
+
+  padding: 0.5rem;
+
+  width: fit-content;
+
+  .ApiImage {
+    margin-right: 1rem;
+  }
+}

@@ -1,8 +1,6 @@
 import React from 'react';
 import useMarvelApi from '../../hooks/useMarvelApi';
 import ApiImage from '../ApiImage';
-
-// 1010354 - Adam Warlock
 import './styles.css';
 
 export default ({ id }) => {
@@ -13,8 +11,8 @@ export default ({ id }) => {
 
   const [character] = data;
   return (
-    <div className="CharacterCard">
-      <ApiImage image={character.thumbnail} size="standard_medium" alt={character.name} />
+    <div className="CharacterListItem">
+      <ApiImage image={character.thumbnail} size="portrait_small" alt={character.name} />
       <span>{character.name}</span>
     </div>
   );

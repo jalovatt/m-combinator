@@ -1,0 +1,15 @@
+@font-face {
+    font-family: 'marvelregular';
+    src: url('assets/fonts/marvel-regular-webfont.woff2') format('woff2'),
+         url('assets/fonts/marvel-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+  font-family: 'avengeance_heroic_avengerIt';
+  src: url('assets/fonts/avengeance_heroic_avenger_at-webfont.woff2') format('woff2'),
+       url('assets/fonts/avengeance_heroic_avenger_at-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}

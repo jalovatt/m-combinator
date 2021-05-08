@@ -1,0 +1,44 @@
+@import '../assets/fonts/styles.css';
+
+body {
+  --font-marvel: 'marvelregular';
+  --font-avenger: 'avengeance_heroic_avengerIt';
+
+  margin: 0;
+}
+
+.App {
+  display: grid;
+  grid-template-areas:
+    "a a a a"
+    "b b b b"
+    "c d d d"
+    "e e e e";
+  grid-template-rows: 20vh 20vh 55vh 5vh;
+  grid-template-columns: 20vw 30vw 25vw 25vw;
+
+  .Header {
+    outline: 1px dotted magenta;
+    grid-area: a;
+  }
+
+  .SelectedCharacters {
+    outline: 1px dotted magenta;
+    grid-area: b;
+  }
+
+  .CharacterList {
+    outline: 1px dotted magenta;
+    grid-area: c;
+  }
+
+  .ComicGrid {
+    outline: 1px dotted magenta;
+    grid-area: d;
+  }
+
+  .Footer {
+    outline: 1px dotted magenta;
+    grid-area: e;
+  }
+}

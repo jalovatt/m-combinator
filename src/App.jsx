@@ -1,11 +1,18 @@
 import React from 'react';
-import CharacterCard from './components/CharacterCard';
-import ComicCard from './components/ComicCard';
+import SelectedCharacters from './components/SelectedCharacters';
+import CharacterList from './components/CharacterList';
+import ComicGrid from './components/ComicGrid';
+import Footer from './components/Footer';
+import Header from './components/Header';
+
+import './App.css';
 
 export default () => (
   <div className="App">
-    <h1>This is my project</h1>
-    <CharacterCard id="1010354" />
-    <ComicCard id="14077" />
+    <Header />
+    <SelectedCharacters />
+    <CharacterList />
+    <ComicGrid />
+    <Footer />
   </div>
 );

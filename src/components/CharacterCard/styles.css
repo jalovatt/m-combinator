@@ -1,0 +1,15 @@
+.CharacterCard {
+  font-family: var(--font-avenger);
+  font-size: 3rem;
+
+  display: flex;
+
+  flex-direction: row;
+  align-items: center;
+
+  .ApiImage {
+    border-radius: 50%;
+    border: 0.5rem solid black;
+    margin-right: 0.5rem;
+  }
+}
