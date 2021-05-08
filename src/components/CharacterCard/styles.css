@@ -9,7 +9,7 @@
 
   .ApiImage {
     border-radius: 50%;
-    border: 0.5rem solid black;
+    border: 0.25rem solid black;
     margin-right: 0.5rem;
   }
 
@@ -17,7 +17,7 @@
     text-shadow: red 4px 4px;
 
     .ApiImage {
-      box-shadow: 4px 4px red;
+      box-shadow: 0px 0px 0px 4px red;
     }
   }
 }

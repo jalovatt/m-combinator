@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import useMarvelApi from './hooks/useMarvelApi';
+import { useMarvelApi } from './hooks/useMarvelApi';
 
 const Context = React.createContext({});
 

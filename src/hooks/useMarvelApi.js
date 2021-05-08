@@ -47,7 +47,39 @@ const apiRequest = async (path, params) => {
   return [data, error];
 };
 
-export default (path, params) => {
+const awaiting = {};
+
+const fetchWithCache = async (path, params) => {
+  const requestKey = `${path}-${JSON.stringify(params)}`;
+
+  if (awaiting[requestKey]) {
+    return awaiting[requestKey];
+  }
+
+  /*
+    Marvel's API is pretty slow, even just to return a 304, and gets worse
+    with paginated content. Their docs say it's alright to cache responses
+    for up to 24 hours.
+  */
+  let result = lscache.get(requestKey);
+
+  if (!result) {
+    awaiting[requestKey] = apiRequest(path, params);
+    result = await awaiting[requestKey]
+      // eslint-disable-next-line no-console
+      .catch((err) => console.error(err));
+
+    awaiting[requestKey] = null;
+
+    if (result) {
+      lscache.set(requestKey, result, 60 * 60 * 24);
+    }
+  }
+
+  return result;
+};
+
+export const useMarvelApi = (path, params) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -57,26 +89,7 @@ export default (path, params) => {
       setError(null);
       setLoading(true);
 
-      const requestKey = `${path}-${JSON.stringify(params)}`;
-
-      /*
-        Marvel's API is pretty slow, even just to return a 304, and gets worse
-        with paginated content. Their docs say it's alright to cache responses
-        for up to 24 hours.
-      */
-      let result = lscache.get(requestKey);
-
-      if (!result) {
-        result = await apiRequest(path, params)
-          // eslint-disable-next-line no-console
-          .catch((err) => console.error(err));
-
-        if (result) {
-          lscache.set(requestKey, result, 60 * 60 * 24);
-        }
-      }
-
-      const [apiData, apiError] = result;
+      const [apiData, apiError] = await fetchWithCache(path, params);
 
       if (apiData) {
         setData(apiData);
@@ -91,6 +104,65 @@ export default (path, params) => {
 
     return getResult();
   }, [path, params]);
+
+  return { data, loading, error };
+};
+
+// TODO: Error handling
+/*
+  Get all selected characters' events and return events in which they all appear
+*/
+const fetchCharacterEvents = async (characters) => {
+  const allEvents = await Promise.all(
+    characters.map((id) => fetchWithCache(`characters/${id}/events`)),
+  );
+
+  const counts = {};
+  allEvents.forEach(([events]) => events.forEach((event) => {
+    if (!counts[event.id]) {
+      counts[event.id] = { event, count: 0 };
+    }
+
+    counts[event.id].count += 1;
+  }));
+
+  /*
+    Returning as an array for consistency with [data, error], just so the hook
+    doesn't need to be changed.
+  */
+  return [
+    Object.values(counts)
+      .filter(({ count }) => count === characters.length)
+      .map(({ event }) => event),
+  ];
+};
+
+// TODO: Error handling
+export const useCharacterEvents = (characters = []) => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const getResult = async () => {
+      setError(null);
+      setLoading(true);
+
+      const [eventData, eventError] = await fetchCharacterEvents(characters);
+
+      if (eventData) {
+        setData(eventData);
+      }
+
+      if (eventError) {
+        setError(eventError);
+      }
+
+      setLoading(false);
+    };
+
+    return getResult();
+  }, [characters]);
 
   return { data, loading, error };
 };

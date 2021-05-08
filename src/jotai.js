@@ -1,5 +1,6 @@
 import { atom, useAtom } from 'jotai';
 
+// TODO: This errors if you click blank space
 const findDataKeyInEventTree = (el, key) => {
   let cur = el;
 

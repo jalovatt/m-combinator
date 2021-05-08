@@ -32,7 +32,7 @@ body {
     grid-area: c;
   }
 
-  .ComicGrid {
+  .EventGrid {
     outline: 1px dotted magenta;
     grid-area: d;
   }
