@@ -1,24 +1,9 @@
 import { atom, useAtom } from 'jotai';
 
-// TODO: This errors if you click blank space
-const findDataKeyInEventTree = (el, key) => {
-  let cur = el;
-
-  while (cur && !cur.dataset[key]) {
-    cur = cur.parentElement;
-  }
-
-  return cur?.dataset[key];
-};
-
 const selectedCharacters = atom([], (get, set, e) => {
   const cur = get(selectedCharacters);
 
-  /*
-    Since dataset.id is on the component's wrapper, we may need to walk up to it
-    from a child element.
-  */
-  const value = findDataKeyInEventTree(e.target, 'id');
+  const value = e.currentTarget.dataset.id;
 
   if (!value) {
     throw new Error('Key \'id\' was not found on any elements in the event tree');

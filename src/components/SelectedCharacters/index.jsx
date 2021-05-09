@@ -14,8 +14,8 @@ export default () => {
       </div>
     )
     : (
-      <div className="SelectedCharacters" onClick={updateSelected}>
-        {selected.map((id) => <CharacterCard id={id} key={id} />)}
+      <div className="SelectedCharacters">
+        {selected.map((id) => <CharacterCard id={id} key={id} onClick={updateSelected} />)}
       </div>
     );
 };
