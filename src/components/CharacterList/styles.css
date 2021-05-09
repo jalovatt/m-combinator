@@ -1,4 +1,10 @@
 .CharacterList {
   overflow-x: hidden;
   overflow-y: auto;
+
+  border: 2px solid var(--color-text-secondary);
+
+  .CharacterListItem {
+    margin-bottom: 0.5rem;
+  }
 }

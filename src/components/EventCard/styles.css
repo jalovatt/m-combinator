@@ -1,13 +1,26 @@
 .EventCard {
   display: flex;
   flex-direction: row;
-  align-items: center;
-
-  border: 1px solid black;
 
   padding: 0.5rem;
 
   width: fit-content;
+
+  color: var(--color-text-primary);
+
+  h3 {
+    font-size: 1.5rem;
+    line-height: 1;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  h4 {
+    color: var(--color-text-secondary);
+    font-size: 1.1rem;
+    margin-top: 0;
+    margin-bottom: 0.9rem;
+  }
 
   .ApiImage {
     margin-right: 1rem;

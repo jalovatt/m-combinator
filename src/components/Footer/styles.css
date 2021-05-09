@@ -1,13 +1,21 @@
 .Footer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
   text-align: center;
+  font-size: 1.5rem;
+
+  h6 {
+    margin: 0 auto;
+  }
 
   a {
-    color: black;
+    color: var(--color-text-primary);
     text-decoration: none;
   }
 
   a:hover {
-    color: blue;
+    color: var(--color-text-shadow);
     text-decoration: underline;
   }
 }

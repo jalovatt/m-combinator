@@ -14,7 +14,10 @@ export default () => {
 
   return (
     <div className="EventGrid">
-      {data.map((event) => <EventCard event={event} key={event.id} />)}
+      <h4>These characters appear together in {data.length} event(s)</h4>
+      <div className="content scrollbar">
+        {data.map((event) => <EventCard event={event} key={event.id} />)}
+      </div>
     </div>
   );
 };

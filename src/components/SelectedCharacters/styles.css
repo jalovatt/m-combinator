@@ -1,6 +1,10 @@
 .SelectedCharacters {
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: space-evenly;
+
+  .selectMessage {
+    color: var(--color-text-shadow);
+    font-size: 1.5rem;
+  }
 }

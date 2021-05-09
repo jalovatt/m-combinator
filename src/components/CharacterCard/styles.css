@@ -7,17 +7,19 @@
   flex-direction: row;
   align-items: center;
 
+  color: var(--color-text-primary);
+
   .ApiImage {
     border-radius: 50%;
-    border: 0.25rem solid black;
+    border: 0.25rem solid var(--color-text-primary);
     margin-right: 0.5rem;
   }
 
   &:hover {
-    text-shadow: red 4px 4px;
+    text-shadow: var(--color-text-shadow) 4px 4px;
 
     .ApiImage {
-      box-shadow: 0px 0px 0px 4px red;
+      border-color: var(--color-text-shadow);
     }
   }
 }

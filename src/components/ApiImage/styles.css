@@ -1,0 +1,41 @@
+.ApiImage {
+  &.standard_small {
+    width: 65px;
+    height: 45px;
+  }
+
+  &.standard_medium {
+    width: 100px;
+    height: 100px;
+  }
+
+  &.standard_large {
+    width: 140px;
+    height: 140px;
+  }
+
+  &.standard_fantastic {
+    width: 250px;
+    height: 250px;
+  }
+
+  &.portrait_small {
+    width: 50px;
+    height: 75px;
+  }
+
+  &.portrait_medium {
+    width: 100px;
+    height: 150px;
+  }
+
+  &.landscape_xlarge {
+    width: 270px;
+    height: 200px;
+  }
+
+  &.full {
+    width: 500px;
+    height: auto;
+  }
+}

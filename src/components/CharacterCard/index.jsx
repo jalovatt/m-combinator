@@ -10,8 +10,8 @@ export default ({ id }) => {
 
   return (
     <div className="CharacterCard" data-id={id}>
-      <ApiImage image={character.thumbnail} size="standard_medium" alt={character.name} />
-      <span>{character.name}</span>
+      <ApiImage image={character.thumbnail} size="standard_large" alt={character.name} />
+      <span>{character.name.replace(/ \(.+\)$/, '')}</span>
     </div>
   );
 };

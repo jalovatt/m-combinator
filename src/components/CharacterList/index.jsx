@@ -11,7 +11,7 @@ export default () => {
   const [selected, updateSelected] = useSelectedCharacters();
 
   return (
-    <div className="CharacterList" onClick={updateSelected}>
+    <div className="CharacterList scrollbar" onClick={updateSelected}>
       {characters.array.reduce((acc, { id }) => {
         if (!selected.includes(id)) {
           acc.push(<CharacterListItem key={id} id={id} />);

@@ -1,17 +1,10 @@
 import React from 'react';
+import './styles.css';
 
-const sizes = {
-  standard_small: { width: '65px', height: '45px' },
-  standard_medium: { width: '100px', height: '100px' },
-  portrait_small: { width: '50px', height: '75px' },
-  portrait_medium: { width: '100px', height: '150px' },
-};
-
-export default ({ image: { path, extension }, alt, size = 'standard_small' }) => (
+export default ({ image: { path, extension }, alt, size }) => (
   <img
-    className="ApiImage"
-    src={`${path}/${size}.${extension}`}
+    className={`ApiImage ${size || 'full'}`}
+    src={`${path}${size ? `/${size}` : ''}.${extension}`}
     alt={alt}
-    style={sizes[size]}
   />
 );
