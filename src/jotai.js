@@ -10,13 +10,18 @@ const selectedCharacters = atom([], (get, set, e) => {
   }
 
   // IDs come back as a string from the DOM element's dataset
-  const num = parseInt(value, 10);
+  const id = parseInt(value, 10);
 
-  const index = cur.indexOf(num);
+  const index = cur.indexOf(id);
 
-  const next = (index === -1)
-    ? [...cur, num]
-    : cur.slice(0, index).concat(cur.slice(index + 1));
+  let next = cur;
+  if (index === -1) {
+    if (cur.length < 4) {
+      next = [...cur, id];
+    }
+  } else {
+    next = cur.slice(0, index).concat(cur.slice(index + 1));
+  }
 
   set(selectedCharacters, next);
 });
