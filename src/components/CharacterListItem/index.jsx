@@ -7,9 +7,9 @@ export default ({ id, onClick }) => {
   const character = useCharacters().byId[id];
 
   return (
-    <div className="CharacterListItem" data-id={id} onClick={onClick}>
+    <button type="button" className="CharacterListItem" data-id={id} onClick={onClick}>
       <ApiImage image={character.thumbnail} size="standard_medium" alt={character.name} />
       <span>{character.name.replace(/ \(.+\)$/, '')}</span>
-    </div>
+    </button>
   );
 };

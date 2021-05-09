@@ -9,6 +9,13 @@
 
   color: var(--color-text-primary);
 
+  background: none;
+  border: none;
+
+  &:focus {
+    outline: 2px solid var(--color-text-shadow);
+  }
+
   .ApiImage {
     border-radius: 50%;
     border: 0.25rem solid var(--color-text-primary);
