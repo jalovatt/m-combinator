@@ -1,7 +1,9 @@
 import React from 'react';
 import { useCharacterEvents } from '../../hooks/useMarvelApi';
 import { useSelectedCharacters } from '../../jotai';
+import Err from '../Err';
 import EventCard from '../EventCard';
+import Loading from '../Loading';
 import './styles.css';
 
 export default () => {
@@ -9,15 +11,18 @@ export default () => {
 
   const { data, loading, error } = useCharacterEvents(selected);
 
-  if (error) { return <h4>Error</h4>; }
-  if (loading || !data?.length) { return <h4>Loading...</h4>; }
+  const content = (error && <Err />)
+    || (loading && <Loading />)
+    || (data?.length && (
+      <>
+        {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
+        <h4>These characters appear together in {data.length} event(s)</h4>
+        <div className="content scrollbar">
+          {data.map((event) => <EventCard event={event} key={event.id} />)}
+        </div>
+      </>
+    ))
+    || null;
 
-  return (
-    <div className="EventGrid">
-      <h4>These characters appear together in {data.length} event(s)</h4>
-      <div className="content scrollbar">
-        {data.map((event) => <EventCard event={event} key={event.id} />)}
-      </div>
-    </div>
-  );
+  return <div className="EventGrid">{content}</div>;
 };

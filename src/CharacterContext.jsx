@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
+import Err from './components/Err';
+import Loading from './components/Loading';
 import { useMarvelApi } from './hooks/useMarvelApi';
 
 const Context = React.createContext({});
@@ -24,13 +26,10 @@ export default ({ children }) => {
     setCharacters(formatted);
   }, [data]);
 
-  return (
-    <Context.Provider value={characters}>
-      {
-        (error && <h4>Error</h4>)
-        || ((loading || !characters?.array.length) && <h4>Loading...</h4>)
-        || children
-      }
-    </Context.Provider>
-  );
+  const content = (error && <Err />)
+  || (loading && <Loading />)
+  || (characters?.array.length && children)
+  || null;
+
+  return <Context.Provider value={characters}>{content}</Context.Provider>;
 };
