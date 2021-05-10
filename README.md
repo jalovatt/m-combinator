@@ -7,6 +7,10 @@ It uses the [Marvel API](https://marvel.com) to show major comic events in which
 ![A screenshot of the app](assets/screenshot.png)
 
 ## Usage
+
+Visit [M-Combinator](https://adoring-rosalind-e8372b.netlify.app/) on Netlify.
+
+### Local
 This project was built using Node v14.16.1, but should work on any version released in the last year or two.
 
 1. Clone the repo
