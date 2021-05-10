@@ -44,5 +44,6 @@ If I were to spend more time on this project, some notable to-do items include:
 - Accessibility testing and appropriate changes. I've done the bare minimum here, but this should really be one of the top concerns for any design + implementation.
 - Better standardization/reuse of styles and logic.
 - A more responsive layout.
+- Proper loading and error handling.
 - Searching on the level of individual comic issues, rather than large crossover events. As noted above, there would challenges in fetching the results, and the number of items involved would require the use of lazy-loading or virtual lists in React to avoid bogging down the browser.
 - Filtering + sorting the returned events, for instance by year, or being able to _exclude_ a selected character from the results.

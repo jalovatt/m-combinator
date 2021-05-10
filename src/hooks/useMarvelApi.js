@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
 import lscache from 'lscache';
 
+lscache.setBucket('m-combinator');
+
 const { apikey } = import.meta.env;
 
 const apiBase = 'https://gateway.marvel.com/v1/public/';
 const apiRowsLimit = 100;
 
+// Fetch all of the pages for a given request
 const apiRequest = async (path, params) => {
   const paramArr = [`apikey=${apikey}`, `limit=${apiRowsLimit}`];
 
@@ -49,7 +52,7 @@ const apiRequest = async (path, params) => {
 
 const awaiting = {};
 
-const fetchWithCache = async (path, params) => {
+const fetchWithLocalStorage = async (path, params) => {
   const requestKey = `${path}-${JSON.stringify(params)}`;
 
   if (awaiting[requestKey]) {
@@ -79,7 +82,7 @@ const fetchWithCache = async (path, params) => {
   return result;
 };
 
-export const useMarvelApi = (path, params) => {
+const useFetchCallback = (cb, ...params) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -89,7 +92,7 @@ export const useMarvelApi = (path, params) => {
       setError(null);
       setLoading(true);
 
-      const [apiData, apiError] = await fetchWithCache(path, params);
+      const [apiData, apiError] = await cb(...params);
 
       if (apiData) {
         setData(apiData);
@@ -103,9 +106,27 @@ export const useMarvelApi = (path, params) => {
     };
 
     return getResult();
-  }, [path, params]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cb, ...params]);
 
   return { data, loading, error };
+};
+
+export const useMarvelApi = (path, params) => useFetchCallback(fetchWithLocalStorage, path, params);
+
+const intersectionOfEventLists = (eventLists) => {
+  const counts = {};
+  eventLists.forEach(([events]) => events.forEach((event) => {
+    if (!counts[event.id]) {
+      counts[event.id] = { event, count: 0 };
+    }
+
+    counts[event.id].count += 1;
+  }));
+
+  return Object.values(counts)
+    .filter(({ count }) => count === eventLists.length)
+    .map(({ event }) => event);
 };
 
 // TODO: Error handling
@@ -114,55 +135,21 @@ export const useMarvelApi = (path, params) => {
 */
 const fetchCharacterEvents = async (characters) => {
   const allEvents = await Promise.all(
-    characters.map((id) => fetchWithCache(`characters/${id}/events`)),
+    characters.map((id) => fetchWithLocalStorage(`characters/${id}/events`)),
   );
-
-  const counts = {};
-  allEvents.forEach(([events]) => events.forEach((event) => {
-    if (!counts[event.id]) {
-      counts[event.id] = { event, count: 0 };
-    }
-
-    counts[event.id].count += 1;
-  }));
 
   /*
     Returning as an array for consistency with [data, error], just so the hook
     doesn't need to be changed.
   */
   return [
-    Object.values(counts)
-      .filter(({ count }) => count === characters.length)
-      .map(({ event }) => event),
+    intersectionOfEventLists(allEvents),
   ];
 };
 
+const emptyArray = [];
+
 // TODO: Error handling
-export const useCharacterEvents = (characters = []) => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const getResult = async () => {
-      setError(null);
-      setLoading(true);
-
-      const [eventData, eventError] = await fetchCharacterEvents(characters);
-
-      if (eventData) {
-        setData(eventData);
-      }
-
-      if (eventError) {
-        setError(eventError);
-      }
-
-      setLoading(false);
-    };
-
-    return getResult();
-  }, [characters]);
-
-  return { data, loading, error };
-};
+export const useCharacterEvents = (characters = emptyArray) => (
+  useFetchCallback(fetchCharacterEvents, characters)
+);
