@@ -15,7 +15,7 @@
   }
 
   a:hover {
-    color: var(--color-text-shadow);
+    color: var(--color-active);
     text-decoration: underline;
   }
 }

@@ -16,7 +16,7 @@
   }
 
   &:focus {
-    outline: 2px solid var(--color-text-shadow);
+    outline: 2px solid var(--color-active);
   }
 
   .ApiImage {
@@ -28,7 +28,7 @@
 
   &:hover {
     .ApiImage {
-      border-color: var(--color-text-shadow);
+      border-color: var(--color-active);
     }
   }
 
@@ -36,7 +36,7 @@
     font-size: 3rem;
 
     &:hover {
-      text-shadow: var(--color-text-shadow) 4px 4px;
+      text-shadow: var(--color-active) 4px 4px;
     }
   }
 
@@ -52,7 +52,7 @@
     }
 
     &:hover {
-      color: var(--color-text-shadow);
+      color: var(--color-active);
     }
   }
 }

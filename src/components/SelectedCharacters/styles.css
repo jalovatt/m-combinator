@@ -4,7 +4,7 @@
   justify-content: space-evenly;
 
   .selectMessage {
-    color: var(--color-text-shadow);
+    color: var(--color-active);
     font-size: 1.5rem;
   }
 }

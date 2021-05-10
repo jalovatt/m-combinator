@@ -6,7 +6,7 @@ body {
   --font-text: "Roboto", "Franklin Gothic Medium", Tahoma, sans-serif;
   --color-text-primary: hsl(54, 100%, 50%);
   --color-text-secondary: hsl(54, 77%, 40%);
-  --color-text-shadow: rgb(219, 99, 0);
+  --color-active: rgb(219, 99, 0);
 
   font-family: var(--font-text);
 
