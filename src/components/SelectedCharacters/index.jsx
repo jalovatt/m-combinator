@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelectedCharacters } from '../../jotai';
-import CharacterCard from '../CharacterCard';
+import Character from '../Character';
 
 import './styles.css';
 
@@ -15,7 +15,7 @@ export default () => {
     )
     : (
       <div className="SelectedCharacters">
-        {selected.map((id) => <CharacterCard id={id} key={id} onClick={updateSelected} />)}
+        {selected.map((id) => <Character id={id} key={id} variant="large" onClick={updateSelected} />)}
       </div>
     );
 };
