@@ -24,6 +24,11 @@
     margin-bottom: 0.9rem;
   }
 
+  .subheading {
+    display: flex;
+    justify-content: space-between;
+  }
+
   .ApiImage {
     margin-right: 1rem;
   }
