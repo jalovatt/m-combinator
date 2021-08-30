@@ -1,6 +1,6 @@
 # M-Combinator
 
-This project was created for a React coding challenge.
+This project was created for a React coding challenge, given the basic prompt "choose an API you're familiar with, and do something interesting with it".
 
 It uses the [Marvel API](https://marvel.com) to show major comic events in which a given set of characters all appear.
 
@@ -8,7 +8,7 @@ It uses the [Marvel API](https://marvel.com) to show major comic events in which
 
 ## Usage
 
-Visit [M-Combinator](https://adoring-rosalind-e8372b.netlify.app/) on Netlify.
+Visit [M-Combinator](https://vibrant-kirch-e723ea.netlify.app/) on Netlify.
 
 ### Local
 This project was built using Node v14.16.1, but should work on any version released in the last year or two.
